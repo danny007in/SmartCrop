@@ -1,5 +1,5 @@
 import pandas as pd
-import pandas_profiling as pp
+from pydantic_settings import BaseSettings
 import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
@@ -94,7 +94,7 @@ def ensemblemodels():
 
 # Spot-Check Normalized Models
 def NormalizedModel(nameOfScaler):
-    
+
     if nameOfScaler == 'standard':
         scaler = StandardScaler()
     elif nameOfScaler =='minmax':
@@ -133,7 +133,7 @@ def fit_model(X_train, y_train,models):
         names.append(name)
         msg = "%s: %f (%f)" % (name, cv_results.mean(), cv_results.std())
         print(msg)
-        
+
     return names, results
 
 # Save Trained Model
@@ -153,7 +153,7 @@ def classification_metrics(model, conf_matrix):
     plt.xlabel('Predicted label', fontsize=15)
     plt.show()
     print(classification_report(y_test, y_pred))
-    
+
 
 # Load Dataset
 df = pd.read_csv('SmartCrop-Dataset.csv')
