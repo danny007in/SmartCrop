@@ -21,7 +21,13 @@ pip install -r requirements.txt
 
 # [Usage]()
 ```bash
-python app.py
+streamlit run app.py
+```
+
+or
+
+```bash
+python -m streamlit run app.py
 ```
 
 # [Technologies Used]()

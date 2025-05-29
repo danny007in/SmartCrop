@@ -1,0 +1,9 @@
+numpy==1.21.2
+streamlit==1.14.0
+plotly==5.3.1
+seaborn==0.11.2
+pandas_profiling==3.1.0
+pandas==1.3.3
+matplotlib==3.4.3
+scikit_learn==1.0.2
+altair==4.1.0

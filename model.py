@@ -75,12 +75,12 @@ def read_in_and_split_data(data, target):
 # Spot-Check Algorithms
 def GetModel():
     Models = []
-    Models.append(('LR'   , LogisticRegression()))
-    Models.append(('LDA'  , LinearDiscriminantAnalysis()))
-    Models.append(('KNN'  , KNeighborsClassifier()))
+    # Models.append(('LR'   , LogisticRegression()))
+    # Models.append(('LDA'  , LinearDiscriminantAnalysis()))
+    # Models.append(('KNN'  , KNeighborsClassifier()))
     Models.append(('CART' , DecisionTreeClassifier()))
-    Models.append(('NB'   , GaussianNB()))
-    Models.append(('SVM'  , SVC(probability=True)))
+    # Models.append(('NB'   , GaussianNB()))
+    # Models.append(('SVM'  , SVC(probability=True)))
     return Models
 
 def ensemblemodels():
@@ -89,7 +89,7 @@ def ensemblemodels():
     ensembles.append(('GBM'  , GradientBoostingClassifier()))
     ensembles.append(('RF'   , RandomForestClassifier()))
     ensembles.append(( 'Bagging' , BaggingClassifier()))
-    ensembles.append(('ET', ExtraTreesClassifier()))
+    # ensembles.append(('ET', ExtraTreesClassifier()))
     return ensembles
 
 # Spot-Check Normalized Models
@@ -105,16 +105,16 @@ def NormalizedModel(nameOfScaler):
         scaler = Binarizer()
 
     pipelines = []
-    pipelines.append((nameOfScaler+'LR'  , Pipeline([('Scaler', scaler),('LR'  , LogisticRegression())])))
-    pipelines.append((nameOfScaler+'LDA' , Pipeline([('Scaler', scaler),('LDA' , LinearDiscriminantAnalysis())])))
-    pipelines.append((nameOfScaler+'KNN' , Pipeline([('Scaler', scaler),('KNN' , KNeighborsClassifier())])))
+    # pipelines.append((nameOfScaler+'LR'  , Pipeline([('Scaler', scaler),('LR'  , LogisticRegression())])))
+    # pipelines.append((nameOfScaler+'LDA' , Pipeline([('Scaler', scaler),('LDA' , LinearDiscriminantAnalysis())])))
+    # pipelines.append((nameOfScaler+'KNN' , Pipeline([('Scaler', scaler),('KNN' , KNeighborsClassifier())])))
     pipelines.append((nameOfScaler+'CART', Pipeline([('Scaler', scaler),('CART', DecisionTreeClassifier())])))
     pipelines.append((nameOfScaler+'NB'  , Pipeline([('Scaler', scaler),('NB'  , GaussianNB())])))
-    pipelines.append((nameOfScaler+'SVM' , Pipeline([('Scaler', scaler),('SVM' , SVC())])))
+    # pipelines.append((nameOfScaler+'SVM' , Pipeline([('Scaler', scaler),('SVM' , SVC())])))
     pipelines.append((nameOfScaler+'AB'  , Pipeline([('Scaler', scaler),('AB'  , AdaBoostClassifier())])  ))
     pipelines.append((nameOfScaler+'GBM' , Pipeline([('Scaler', scaler),('GMB' , GradientBoostingClassifier())])  ))
     pipelines.append((nameOfScaler+'RF'  , Pipeline([('Scaler', scaler),('RF'  , RandomForestClassifier())])  ))
-    pipelines.append((nameOfScaler+'ET'  , Pipeline([('Scaler', scaler),('ET'  , ExtraTreesClassifier())])  ))
+    # pipelines.append((nameOfScaler+'ET'  , Pipeline([('Scaler', scaler),('ET'  , ExtraTreesClassifier())])  ))
 
     return pipelines
 
@@ -169,7 +169,8 @@ target ='label'
 X_train, X_test, y_train, y_test = read_in_and_split_data(df, target)
 
 # Train model
-pipeline = make_pipeline(StandardScaler(),  GaussianNB())
+# pipeline = make_pipeline(StandardScaler(),  GaussianNB())
+pipeline = make_pipeline(StandardScaler(),  BaggingClassifier())
 model = pipeline.fit(X_train, y_train)
 y_pred = model.predict(X_test)
 conf_matrix = confusion_matrix(y_test,y_pred)
